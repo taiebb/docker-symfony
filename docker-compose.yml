@@ -6,17 +6,17 @@ services:
         ports:
             - "3306:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: symfony
-            MYSQL_USER: symfony
-            MYSQL_PASSWORD: symfony
+            MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+            MYSQL_DATABASE: $MYSQL_DATABASE
+            MYSQL_USER: $MYSQL_USER
+            MYSQL_PASSWORD: $MYSQL_PASSWORD
     php:
         build: ./php-fpm
         ports:
             - "9000:9001"
         volumes:
-            - ./symfony:/var/www/symfony:cached
-            - ./logs/symfony:/var/www/symfony/var/log:cached
+            - $SYMFONY_APP_PATH:/var/www/symfony:cached
+            - $SYMFONY_LOGS_PATH:/var/www/symfony/var/log:cached
         links:
             - db
         extra_hosts:
@@ -28,8 +28,8 @@ services:
         links:
             - php
         volumes:
-            - ./logs/nginx:/var/log/nginx:cached
-            - ./symfony:/var/www/symfony:cached
+            - $NGINX_LOGS_PATH:/var/log/nginx:cached
+            - $SYMFONY_APP_PATH:/var/www/symfony:cached
 #    elk:
 #        image: willdurand/elk
 #        ports:
