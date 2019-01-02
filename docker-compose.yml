@@ -30,6 +30,10 @@ services:
         volumes:
             - $NGINX_LOGS_PATH:/var/log/nginx:cached
             - $SYMFONY_APP_PATH:/var/www/symfony:cached
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - "8080:80"
 #    elk:
 #        image: willdurand/elk
 #        ports:
