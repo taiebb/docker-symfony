@@ -15,8 +15,8 @@ services:
         ports:
             - "9000:9001"
         volumes:
-            - $SYMFONY_APP_PATH:/var/www/symfony:cached
-            - $SYMFONY_LOGS_PATH:/var/www/symfony/var/log:cached
+            - ./symfony:/var/www/symfony:cached
+            - ./logs/symfony:/var/www/symfony/var/log:cached
         links:
             - db
         extra_hosts:
@@ -28,8 +28,8 @@ services:
         links:
             - php
         volumes:
-            - $NGINX_LOGS_PATH:/var/log/nginx:cached
-            - $SYMFONY_APP_PATH:/var/www/symfony:cached
+            - ./logs/nginx:/var/log/nginx:cached
+            - ./symfony:/var/www/symfony:cached
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         ports:
