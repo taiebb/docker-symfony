@@ -1,6 +1,7 @@
 FROM alpine:3.13
 
-LABEL maintainer="Vincent Composieux <vincent.composieux@gmail.com>"
+RUN apk update && apk upgrade && \
+apk add --no-cache git php7-pdo_sqlite php7-xmlwriter
 
 RUN apk add --update \
     php7-fpm \
